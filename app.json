@@ -1,0 +1,29 @@
+{
+  "name": "GoB Company API",
+  "description": "Hacky and Unofficial API for Companies using Get on Board",
+  "website": "https://github.com/continuum/gob-company-api",
+  "repository": "https://github.com/continuum/gob-company-api",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Ruby_on_Rails_logo.svg",
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
+  },
+  "env": {
+    "RAILS_ENV": "production",
+    "RACK_ENV": "production",
+    "RAILS_SERVE_STATIC_FILES": "true"
+  },
+  "addons": [
+    {"plan": "heroku-postgresql:hobby-dev"},
+    {"plan": "logdna:quaco"}
+  ],
+  "environments": {
+    "test": {
+      "env": { 
+        "POSTGRESQL_VERSION": "10",
+        "RAILS_ENV": "test",
+        "RACK_ENV": "test",    
+      },
+      "addons": ["heroku-postgresql:in-dyno"]
+    }
+  }    
+}
