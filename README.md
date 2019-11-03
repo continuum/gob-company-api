@@ -1,24 +1,14 @@
-# README
+# GoB Company API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A (so far) quick and dirty API server for accesing Get on Board from a company
+perspective.
 
-Things you may want to cover:
+See it live:
 
-* Ruby version
+[![asciicast](https://asciinema.org/a/hAC5d7VefBt3yEQ2FX5cJKQOP.svg)](https://asciinema.org/a/hAC5d7VefBt3yEQ2FX5cJKQOP)
 
-* System dependencies
+## Development
 
-* Configuration
+It's a simple Rails 6 API codebase. No tests so far :(
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Contributions are very welcomed :)
