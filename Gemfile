@@ -8,10 +8,13 @@ gem 'puma', '~> 3.12'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'pg'
+gem 'rswag-api'
+gem 'rswag-ui'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.8'
+  gem 'rswag-specs'
 end
 
 group :development do

@@ -9,6 +9,23 @@ See it live:
 
 ## Development
 
-It's a simple Rails 6 API codebase. No tests so far :(
+It's a simple Rails 6 API codebase. Contributions are very welcomed :)
 
-Contributions are very welcomed :)
+### Tests
+
+For integration tests you need a valid Get on Board username and password. Set
+them as environment variables `GOB_USERNAME` and `GOB_PASSWORD`, for example 
+via:
+
+```bash
+$ export GOB_USERNAME='your-account@example.org'
+$ export GOB_PASSWORD='yoursupersecretpassword'
+```
+
+Then you can run:
+
+```bash
+$ rake spec
+```
+
+And tests should pass
