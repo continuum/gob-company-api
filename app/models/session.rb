@@ -2,13 +2,13 @@ class Session < ApplicationRecord
   validates :email, :password, presence: true
   validates :email, :token, uniqueness: true
   validate :email_and_password_work
-  
+
   before_save :generate_token, if: :password_changed?
-  
+
   def generate_token
     self.token = SecureRandom.base64(32)
   end
-  
+
   def active_jobs
     parse_jobs(get('/dashboard/active.json'))
   end
@@ -30,9 +30,9 @@ class Session < ApplicationRecord
       :active, :url
     ).merge(
       job.slice(
-        :title, 
-        :min_salary, :max_salary, 
-        :remote, :city, :country, 
+        :title,
+        :min_salary, :max_salary,
+        :remote, :city, :country,
         :category_name, :tags, :perks, :modality, :seniority,
         :functions, :functions_headline,
         :benefits, :benefits_headline,
@@ -51,10 +51,10 @@ class Session < ApplicationRecord
   end
 
 
-  def parse_phases(phases) 
+  def parse_phases(phases)
     phases.sort_by { |phase| phase[:position] }. map do |phase|
       phase.slice(
-        :position, :title, :description, :kind, 
+        :position, :title, :kind,
         :job_applications_count, :job_applications_url
       )
     end
@@ -73,10 +73,10 @@ class Session < ApplicationRecord
     errors.add(:password, "Invalid email or password")
     Rails.logger.error("Unexpected response: #{e.response}")
   end
-  
+
   def get(path, params = {})
     response = RestClient.get(
-      "https://www.getonbrd.com" + path, 
+      "https://www.getonbrd.com" + path,
       params.merge(cookies: cookies)
     )
     JSON.parse(response, symbolize_names: true)
@@ -86,12 +86,12 @@ class Session < ApplicationRecord
     @cookies ||= cookies_from_email_and_password
   end
 
-  def cookies_from_email_and_password        
+  def cookies_from_email_and_password
     response = RestClient.get('https://www.getonbrd.com/members/auth/login')
     page = Nokogiri::HTML(response.body)
     csrf_token = page.css('meta[name=csrf-token]').first['content']
     response = RestClient.post(
-      'https://www.getonbrd.com/members/auth/login', 
+      'https://www.getonbrd.com/members/auth/login',
       {
         authenticity_token: csrf_token,
         team_member: {
@@ -99,7 +99,7 @@ class Session < ApplicationRecord
           password: password,
         }
       },
-      {cookies: response.cookies}    
+      {cookies: response.cookies}
     )
     raise RestClient::ExceptionWithResponse.new(response)
   rescue RestClient::Found => e

@@ -36,6 +36,29 @@ paths:
             type: array
             items:
               "$ref": "#/definitions/job_iteration_object"
+  "/jobs/{slug}/processes/{id}":
+    get:
+      summary: Job detail
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      security:
+      - token: []
+      parameters:
+      - name: slug
+        in: path
+        type: string
+        required: true
+      - name: id
+        in: path
+        type: integer
+        required: true
+      responses:
+        '200':
+          description: details of a job
+          schema:
+            "$ref": "#/definitions/job_object"
   "/sessions":
     post:
       summary: Authenticate with email and password
@@ -154,7 +177,14 @@ definitions:
       company_public_url:
         type: string
       company_name:
-        type: string
+        type: object
+        properties:
+          name:
+            type: string
+          about:
+            type: string
+          url:
+            type: string
       phases:
         type: array
         items:
@@ -165,8 +195,6 @@ definitions:
       position:
         type: integer
       title:
-        type: string
-      description:
         type: string
       kind:
         type: string

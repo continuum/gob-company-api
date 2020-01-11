@@ -62,7 +62,14 @@ RSpec.configure do |config|
             unpublished: { type: :boolean },
             public_url: { type: :string },
             company_public_url: { type: :string },
-            company_name: { type: :string },
+            company_name: {
+              type: :object,
+              properties: {
+                name: { type: :string },
+                about: { type: :string },
+                url: { type: :string },
+              }
+            },
             phases: { type: :array, items: {'$ref' => '#/definitions/phase_object'}}
           }
         },
@@ -72,7 +79,6 @@ RSpec.configure do |config|
           properties: {
             position: { type: :integer },
             title: { type: :string },
-            description: { type: :string },
             kind: { type: :string },
             job_applications_count: { type: :integer },
             job_applications_url: { type: :string },
