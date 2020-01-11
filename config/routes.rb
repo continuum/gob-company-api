@@ -6,11 +6,15 @@ Rails.application.routes.draw do
     collection do
       post 'search'
     end
+
+    member do
+      get '/applications', to: 'candidates#applications'
+    end
   end
   resources :jobs, only: [] do
-    collection do 
+    collection do
       get 'active'
-      get 'closed'      
+      get 'closed'
     end
 
     member do

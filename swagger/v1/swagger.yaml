@@ -22,6 +22,25 @@ paths:
             type: array
             items:
               "$ref": "#/definitions/candidate_object"
+  "/candidates/{id}/applications":
+    get:
+      summary: Candidate applications
+      parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+      produces:
+      - application/json
+      security:
+      - token: []
+      responses:
+        '200':
+          description: list of candidate applications
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/candidate_application_object"
   "/jobs/active":
     get:
       summary: List active jobs
@@ -262,3 +281,25 @@ definitions:
     - id
     - name
     - email
+  candidate_application_object:
+    type: object
+    properties:
+      id:
+        type: string
+      url:
+        type: string
+      job_title:
+        type: string
+      phase_title:
+        type: string
+      sent_at:
+        type: string
+      sent_at_full:
+        type: string
+      messages_count:
+        type: integer
+      notes_count:
+        type: integer
+      discard_reason:
+        type: string
+        x-nullable: true

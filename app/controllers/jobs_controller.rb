@@ -10,5 +10,5 @@ class JobsController < ApplicationController
   def show
     render json: @session.job(request.fullpath)
   end
-    
+
 end

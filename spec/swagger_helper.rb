@@ -103,6 +103,21 @@ RSpec.configure do |config|
             twitter_link: { type: :string, 'x-nullable' => true },
           },
           required: [:id, :name, :email]
+        },
+
+        candidate_application_object: {
+          type: :object,
+          properties: {
+            id: { type: :string },
+            url: { type: :string },
+            job_title: { type: :string },
+            phase_title: { type: :string },
+            sent_at: { type: :string },
+            sent_at_full: { type: :string },
+            messages_count: { type: :integer },
+            notes_count: { type: :integer },
+            discard_reason: { type: :string, 'x-nullable' => true },
+          }
         }
       }
 
