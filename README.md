@@ -11,10 +11,13 @@ See it live:
 
 It's a simple Rails 6 API codebase. Contributions are very welcomed :)
 
+Make sure you add rswag specs for new endopoints (or change the existing
+specs when you tweak any API endpoint).
+
 ### Tests
 
 For integration tests you need a valid Get on Board username and password. Set
-them as environment variables `GOB_USERNAME` and `GOB_PASSWORD`, for example 
+them as environment variables `GOB_USERNAME` and `GOB_PASSWORD`, for example
 via:
 
 ```bash
@@ -28,4 +31,4 @@ Then you can run:
 $ rake spec
 ```
 
-And tests should pass
+And tests should pass.
