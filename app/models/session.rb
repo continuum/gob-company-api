@@ -24,7 +24,14 @@ class Session < ApplicationRecord
   def search_candidates(query, page = nil)
     page = [page.to_i, 1].max
     parse_candidates(
-      get("/candidates.json?search=#{CGI.escape(query)}&page=#{page}"))
+      get("/candidates.json?search=#{CGI.escape(query)}&page=#{page}")[:webpros]
+    )
+  end
+
+  def candidate_applications(candidate_id)
+    parse_candidate_applications(
+      get("/candidates/#{candidate_id}/applications.json")[:job_applications]
+    )
   end
 
   private
@@ -72,7 +79,7 @@ class Session < ApplicationRecord
   end
 
   def parse_candidates(candidates)
-    candidates[:webpros].map do |candidate|
+    candidates.map do |candidate|
       parse_candidate(candidate)
     end
   end
@@ -86,6 +93,20 @@ class Session < ApplicationRecord
     )
   end
 
+  def parse_candidate_applications(candidate_applications)
+    candidate_applications.map do |candidate_application|
+      parse_candidate_application(candidate_application)
+    end
+  end
+
+  def parse_candidate_application(candidate_application)
+    candidate_application.slice(
+      :id, :url, :job_title, :phase_title,
+      :sent_at, :sent_at_full,
+      :messages_count, :notes_count,
+      :discard_reason
+    )
+  end
 
   def email_and_password_work
     get('/dashboard.json')
