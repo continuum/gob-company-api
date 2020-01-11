@@ -19,7 +19,67 @@ RSpec.configure do |config|
         title: 'GoB Company API',
         version: 'v1'
       },
-      paths: {}
+      paths: {},
+      securityDefinitions: {
+        token: {
+          type: :apiKey,
+          name: :Authorization,
+          in: :header
+        }
+      },
+      definitions: {
+        job_iteration_object: {
+          type: :object,
+          properties: {
+            url: { type: :string },
+            title: { type: :string },
+          },
+          required: [:url, :title]
+        },
+
+        job_object: {
+          type: :object,
+          properties: {
+            active: { type: :boolean },
+            url: { type: :string },
+            title: { type: :string },
+            min_salary: { type: :integer },
+            max_salary: { type: :integer },
+            remote: { type: :boolean },
+            city: { type: :string },
+            country: { type: :string },
+            category_name: { type: :string },
+            tags: { type: :array, items: { type: :string } },
+            perks: { type: :array, items: { type: :string } },
+            modality: { type: :string },
+            seniority: { type: :string },
+            functions: { type: :string },
+            functions_headline: { type: :string },
+            benefits: { type: :string },
+            benefits_headline: { type: :string },
+            desirable: { type: :string },
+            desirable_headline: { type: :string },
+            unpublished: { type: :boolean },
+            public_url: { type: :string },
+            company_public_url: { type: :string },
+            company_name: { type: :string },
+            phases: { type: :array, items: {'$ref' => '#/definitions/phase_object'}}
+          }
+        },
+
+        phase_object: {
+          type: :object,
+          properties: {
+            position: { type: :integer },
+            title: { type: :string },
+            description: { type: :string },
+            kind: { type: :string },
+            job_applications_count: { type: :integer },
+            job_applications_url: { type: :string },
+          }
+        }
+      }
+
     }
   }
 
