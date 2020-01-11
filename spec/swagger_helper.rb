@@ -83,6 +83,26 @@ RSpec.configure do |config|
             job_applications_count: { type: :integer },
             job_applications_url: { type: :string },
           }
+        },
+
+        candidate_object: {
+          type: :object,
+          properties: {
+            id: { type: :string },
+            firstname: { type: :string },
+            name: { type: :string },
+            email: { type: :string },
+            description: { type: :string, 'x-nullable' => true },
+            avatar: { type: :string, 'x-nullable' => true },
+            country_name: { type: :string, 'x-nullable' => true},
+            linkedin_link: { type: :string, 'x-nullable' => true },
+            github_link: { type: :string, 'x-nullable' => true },
+            cv_link: { type: :string, 'x-nullable' => true },
+            stackoverflow_link: { type: :string, 'x-nullable' => true },
+            portfolio_link: { type: :string, 'x-nullable' => true },
+            twitter_link: { type: :string, 'x-nullable' => true },
+          },
+          required: [:id, :name, :email]
         }
       }
 
