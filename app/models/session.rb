@@ -21,6 +21,12 @@ class Session < ApplicationRecord
     parse_job(get(job_url + '.json'))
   end
 
+  def search_candidates(query, page = nil)
+    page = [page.to_i, 1].max
+    parse_candidates(
+      get("/candidates.json?search=#{CGI.escape(query)}&page=#{page}"))
+  end
+
   private
 
   def parse_job(gob_job)
@@ -50,7 +56,6 @@ class Session < ApplicationRecord
     )
   end
 
-
   def parse_phases(phases)
     phases.sort_by { |phase| phase[:position] }. map do |phase|
       phase.slice(
@@ -64,8 +69,23 @@ class Session < ApplicationRecord
     gob_jobs[:job_iterations].map do |job_iteration|
       {url: job_iteration[:url], title: job_iteration[:job][:title]}
     end
-
   end
+
+  def parse_candidates(candidates)
+    candidates[:webpros].map do |candidate|
+      parse_candidate(candidate)
+    end
+  end
+
+  def parse_candidate(candidate)
+    candidate.slice(
+      :id, :firstname, :name, :email, :description, :avatar,
+      :country_name,
+      :linkedin_link, :github_link, :cv_link, :stackoverflow_link,
+      :portfolio_link, :twitter_link
+    )
+  end
+
 
   def email_and_password_work
     get('/dashboard.json')
