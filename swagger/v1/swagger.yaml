@@ -20,6 +20,22 @@ paths:
             type: array
             items:
               "$ref": "#/definitions/job_iteration_object"
+  "/jobs/closed":
+    get:
+      summary: List active jobs
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      security:
+      - token: []
+      responses:
+        '200':
+          description: list of closed jobs
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/job_iteration_object"
   "/sessions":
     post:
       summary: Authenticate with email and password
