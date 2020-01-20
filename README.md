@@ -7,6 +7,8 @@ See it live:
 
 [![asciicast](https://asciinema.org/a/hAC5d7VefBt3yEQ2FX5cJKQOP.svg)](https://asciinema.org/a/hAC5d7VefBt3yEQ2FX5cJKQOP)
 
+Check out the swagger docs (and try it live) on http://gob-company-api.herokuapp.com/api-docs/index.html
+
 ## Development
 
 It's a simple Rails 6 API codebase. Contributions are very welcomed :)
